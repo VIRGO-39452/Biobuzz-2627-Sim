@@ -12,3 +12,4 @@ assets/field/field-collision.json
 ui/dist/
 dist/
 build/jre/
+.claude/
