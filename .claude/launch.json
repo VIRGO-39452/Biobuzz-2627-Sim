@@ -1,6 +1,0 @@
-{
-  "version": "0.0.1",
-  "configurations": [
-    { "name": "ftc-sim", "runtimeExecutable": "node", "runtimeArgs": ["server/server.mjs"], "port": 5317 }
-  ]
-}
