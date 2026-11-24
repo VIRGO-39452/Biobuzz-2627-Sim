@@ -1,0 +1,90 @@
+{
+  "name": "ftc-biobuzz-sim",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:runtime": "node scripts/build-runtime.mjs",
+    "start": "node server/server.mjs",
+    "test": "node scripts/build-runtime.mjs && node --test test/",
+    "cad": ".venv-cad/bin/python -I cadtools/step2glb.py research/cad/3200-2627-0003.step assets/biobuzz/biobuzz-starterbot.glb 0.6 0.9 && node cadtools/make-biobuzz-assembly.mjs assets/biobuzz/biobuzz-starterbot.glb robots/biobuzz-assembly.json /assets/biobuzz/biobuzz-starterbot.glb assets/biobuzz/part-volumes.json && node cadtools/make-collision.mjs assets/biobuzz/biobuzz-starterbot.glb robots/biobuzz-assembly.json assets/biobuzz/collision.json",
+    "cad:mass": ".venv-cad/bin/python -I cadtools/step_volumes.py research/cad/3200-2627-0003.step assets/biobuzz/part-volumes.json && node cadtools/estimate-mass.mjs assets/biobuzz/part-volumes.json robots/biobuzz-starterbot.json",
+    "cad:field": ".venv-cad/bin/python -I cadtools/step2glb.py research/field/field-cad-step.step assets/field/biobuzz-field.glb 1.0 0.8 yup && .venv-cad/bin/python -I cadtools/step2glb.py research/field/field-cad-step.step assets/field/biobuzz-field-coarse.glb 4.0 1.4 yup && node cadtools/make-field.mjs assets/field/biobuzz-field-coarse.glb assets/field/field-collision.json",
+    "build:ui": "vite build --config ui/vite.config.ts",
+    "dev:ui": "vite --config ui/vite.config.ts",
+    "typecheck": "tsc --noEmit -p ui",
+    "build": "node scripts/build-runtime.mjs && vite build --config ui/vite.config.ts",
+    "app": "npm run build && electron .",
+    "jre": "node scripts/make-jre.mjs",
+    "dist": "npm run build && npm run jre && electron-builder --mac --arm64"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d-compat": "^0.21.0",
+    "adm-zip": "^0.6.1",
+    "ws": "^8.23.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "electron": "^45.4.1",
+    "electron-builder": "^26.18.0",
+    "monaco-editor": "^0.57.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "three": "^0.187.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  },
+  "main": "electron/main.mjs",
+  "productName": "FTC BIOBUZZ Simulator",
+  "description": "Local simulator for the goBILDA BIOBUZZ StarterBot that runs real FTC Java OpModes",
+  "author": "FTC team",
+  "build": {
+    "appId": "org.ftcsim.biobuzz",
+    "productName": "FTC BIOBUZZ Simulator",
+    "asar": false,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**",
+      "server/**",
+      "ui/dist/**",
+      "robots/**",
+      "fields/**",
+      "examples/**",
+      "build/ftc-sim-runtime.jar",
+      "build/jre/**",
+      "assets/biobuzz/biobuzz-starterbot.glb",
+      "assets/biobuzz/collision.json",
+      "assets/field/biobuzz-field.glb",
+      "assets/field/field-collision.json",
+      "package.json",
+      "README.md"
+    ],
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.education",
+      "identity": "-",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false
+    },
+    "dmg": {
+      "title": "FTC BIOBUZZ Simulator"
+    }
+  }
+}

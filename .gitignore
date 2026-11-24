@@ -1,0 +1,14 @@
+node_modules/
+jdk/
+build/
+workspaces/
+research/cad/*.step
+research/cad/*.zip
+.venv-cad/
+assets/**/*.glb
+research/field/*.step
+research/field/*.zip
+assets/field/field-collision.json
+ui/dist/
+dist/
+build/jre/

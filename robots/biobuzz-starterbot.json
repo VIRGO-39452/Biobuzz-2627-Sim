@@ -1,0 +1,167 @@
+{
+  "id": "gobilda-biobuzz-starterbot-6wd",
+  "name": "goBILDA BIOBUZZ StarterBot (6WD drop-center)",
+  "notes": [
+    "Values marked 'estimate' are NOT from goBILDA and must be replaced by measurements. Dimensions marked 'official CAD' were read from 3200-2627-0003.step.",
+    "Hardware names, motor directions, wheel diameter, track width and encoder resolutions come from goBILDA's official example code (3200-2627-0003_example-code).",
+    "Motor electrical constants are the commonly published 5203 Yellow Jacket figures and still need checking against the goBILDA product pages.",
+    "Inertias of the rotating parts, gear tooth counts, backlash and chain slack are in the assembly file under \"drivetrain\"."
+  ],
+  "field": {
+    "sizeM": 3.5857,
+    "config": "biobuzz.json"
+  },
+  "chassis": {
+    "massKg": 6.643,
+    "massKg_source": "estimate from CAD volumes (see massProperties)",
+    "yawInertiaKgM2": 0.219,
+    "yawInertia_source": "estimate from CAD volumes (see massProperties)",
+    "trackWidthM": 0.402,
+    "trackWidth_source": "official CAD (matches TRACK_WIDTH_MM in the official example code)",
+    "wheelRadiusM": 0.048,
+    "wheelRadius_source": "96 mm nominal (official code WHEEL_DIAMETER_MM; CAD tread measures 95.9 mm)",
+    "wheelsPerSide": 3,
+    "wheelbaseM": 0.288,
+    "wheelbase_source": "official CAD: axles at -144, 0, +144 mm",
+    "bodyLengthM": 0.4542,
+    "bodyWidthM": 0.426,
+    "body_source": "official CAD overall bounding box",
+    "tireFriction": 0.9,
+    "tireFriction_source": "estimate",
+    "rollingResistance": 0.03,
+    "rollingResistance_source": "estimate",
+    "frontAxleRiseM": 0.002,
+    "frontAxleRise_source": "official CAD: front omni axle is 2 mm above the rear and middle axles",
+    "tire": {
+      "stiffnessNPerM": 44000,
+      "dampingNsPerM": 500,
+      "slipRefMps": 0.05,
+      "omniLateralFriction": 0.05,
+      "source": "estimate: about 0.5 mm static tire deflection; omni rollers assumed nearly free sideways"
+    },
+    "massProperties": {
+      "massKg": 6.643,
+      "comM": [
+        -0.0072,
+        0.0451,
+        0.0045
+      ],
+      "inertiaKgM2": [
+        0.1382,
+        0.219,
+        0.1217
+      ],
+      "frame": "+X left, +Y up, +Z front; origin at the centre of the middle axle",
+      "source": "estimate: official CAD part volumes x assumed material densities, with approximate fixed masses for motors, battery and servos",
+      "missing": "REV Control Hub (about 0.2 kg) and wiring are not in the CAD and are not included",
+      "breakdownKg": {
+        "aluminium structure and hubs": 2.138,
+        "motors": 1.78,
+        "wheels (plastic and rubber)": 0.859,
+        "steel shafts, bearings, fasteners": 0.838,
+        "battery": 0.57,
+        "servos": 0.18,
+        "polycarbonate plates": 0.179,
+        "silicone rollers": 0.052,
+        "plastic chain": 0.043,
+        "zip ties": 0.004
+      }
+    },
+    "interiorRestitution": 0.02,
+    "interiorRestitution_source": "estimate: a ball squeezed and guided inside the robot does not bounce off its surfaces",
+    "edgeRadiusM": 0.001,
+    "edgeRadius_source": "estimate: plate and channel edges are treated as rounded by 1 mm (real edges are not knife-sharp and the ball is soft)"
+  },
+  "battery": {
+    "openCircuitV": 12.8,
+    "internalResistanceOhm": 0.1,
+    "source": "estimate"
+  },
+  "motorModels": {
+    "yellowjacket-19.2": {
+      "sku": "5203-2402-0019",
+      "freeRpm": 312,
+      "stallTorqueNm": 2.38,
+      "stallCurrentA": 9.2,
+      "ticksPerRev": 537.7
+    },
+    "yellowjacket-50.9": {
+      "sku": "5203-2402-0051",
+      "freeRpm": 117,
+      "stallTorqueNm": 6.71,
+      "stallCurrentA": 9.2,
+      "ticksPerRev": 1425.1
+    },
+    "yellowjacket-1": {
+      "sku": "5203-2402-0019 + 1:1 conversion",
+      "freeRpm": 6000,
+      "stallTorqueNm": 0.124,
+      "stallCurrentA": 9.2,
+      "ticksPerRev": 28,
+      "note": "stall torque derived by dividing the 19.2:1 figure by 19.2 (estimate)"
+    }
+  },
+  "devices": {
+    "left_drive": {
+      "kind": "motor",
+      "model": "yellowjacket-19.2",
+      "role": "drive-left",
+      "forwardSign": 1,
+      "label": "Left drive motor (30T gears to the rear axle, chain to the middle axle; the front omni rolls freely)"
+    },
+    "right_drive": {
+      "kind": "motor",
+      "model": "yellowjacket-19.2",
+      "role": "drive-right",
+      "forwardSign": -1,
+      "label": "Right drive motor (30T gears to the rear axle, chain to the middle axle; the front omni rolls freely)"
+    },
+    "launcher": {
+      "kind": "motor",
+      "model": "yellowjacket-1",
+      "role": "flywheel",
+      "label": "Launcher flywheel (Hogback wheel on Hyper Hub), direct on the 1:1 motor"
+    },
+    "intake": {
+      "kind": "motor",
+      "model": "yellowjacket-50.9",
+      "role": "roller",
+      "label": "Intake motor: 100T gear driving the 20T Gecko shaft"
+    },
+    "left_intake_servo": {
+      "kind": "crservo",
+      "freeRpm": 90,
+      "label": "Left intake Gecko wheel (speed servo); free speed is an estimate",
+      "stallTorqueNm": 0.9,
+      "stallTorque_source": "estimate (about 9 kg cm for the speed servo at 6 V; check the goBILDA product page)"
+    },
+    "right_intake_servo": {
+      "kind": "crservo",
+      "freeRpm": 90,
+      "label": "Right intake Gecko wheel (speed servo); free speed is an estimate",
+      "stallTorqueNm": 0.9,
+      "stallTorque_source": "estimate (about 9 kg cm for the speed servo at 6 V; check the goBILDA product page)"
+    },
+    "windmill": {
+      "kind": "crservo",
+      "freeRpm": 50,
+      "label": "Windmill feeder (torque servo); free speed is an estimate",
+      "stallTorqueNm": 2,
+      "stallTorque_source": "estimate (about 20 kg cm for the torque servo at 6 V; check the goBILDA product page)"
+    },
+    "imu": {
+      "kind": "imu",
+      "label": "Control Hub IMU (the hub is not in the CAD; yaw, pitch and roll are those of the chassis, with no drift or noise)"
+    },
+    "Control Hub": {
+      "kind": "voltage",
+      "label": "Control Hub battery voltage"
+    }
+  },
+  "unresolvedDefaults": {
+    "motorModel": "yellowjacket-19.2",
+    "crservoFreeRpm": 60
+  },
+  "assembly": "biobuzz-assembly.json",
+  "sensorMounts_note": "The StarterBot has no other sensors. To add one, give it an entry under devices, e.g. {\"kind\":\"distance\",\"mount\":{\"position\":[0,0.05,0.26],\"direction\":[0,0,1]},\"maxM\":2,\"label\":\"front distance sensor\"} or {\"kind\":\"color\",\"mount\":{\"position\":[0,0.03,0.05]},\"rangeM\":0.08}. Positions are in the robot frame (+X left, +Y up, +Z front, metres from the middle axle centre). Touch, digital and analog inputs are set by hand in the Hardware panel."
+}

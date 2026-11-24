@@ -1,0 +1,165 @@
+{
+  "id": "ftc-2026-2027-biobuzz",
+  "name": "BIOBUZZ presented by RTX (2026-2027)",
+  "source": "FIRST Tech Challenge Competition Manual, version TU10, Sections 9 and 10 (research/manual/competition-manual.pdf); official Field CAD (STEP) v26-27.2 from the FIRST Playing Field Resources page (research/field)",
+  "frame": "Simulator world: +Z away from the audience, +X toward the red ALLIANCE AREA, +Y up, origin at the field centre on the tile surface.",
+  "sizeM": 3.5857,
+  "size_source": "official field CAD: extent of the tile floor inside the perimeter. The manual quotes a nominal 144 in (3.6575 m).",
+  "tile": {
+    "sizeM": 0.6095,
+    "thicknessM": 0.015,
+    "count": 36,
+    "source": "Section 9.2"
+  },
+  "wallHeightM": 0.3226,
+  "wallHeight_source": "official field CAD: top of the perimeter above the tile surface",
+  "elements": {
+    "pollen": {
+      "label": "POLLEN",
+      "shape": "sphere",
+      "diameterM": 0.071,
+      "color": "#f2c80f",
+      "diameter_source": "Section 9.8: approximately 2.8 in (7.1 cm) Gopher ResisDent polyethylene ball, yellow (am-5851_yellow)",
+      "massKg": 0.025,
+      "mass_source": "inferred: AndyMark lists 0.055 lb and 0.091 lb without saying which ball is which; the lighter figure is assumed to be the smaller ball",
+      "restitution": 0.5,
+      "friction": 0.5,
+      "rollingDamping": 0.6,
+      "linearDamping": 0.05,
+      "contact_source": "estimate (bounce, grip and rolling loss on foam tiles are not published)",
+      "matchCount": 40,
+      "robotControlLimit": 4,
+      "limit_source": "Section 10.3.1; game rule on CONTROL of more than 4 SCORING ELEMENTS"
+    },
+    "nectar_red": {
+      "label": "NECTAR (red)",
+      "shape": "sphere",
+      "diameterM": 0.091,
+      "color": "#d7263d",
+      "diameter_source": "Section 9.8: approximately 3.6 in (9.1 cm) polyethylene ball (am-5852_red)",
+      "massKg": 0.041,
+      "mass_source": "inferred from the AndyMark listing (see POLLEN)",
+      "restitution": 0.5,
+      "friction": 0.5,
+      "rollingDamping": 0.6,
+      "linearDamping": 0.05,
+      "contact_source": "estimate",
+      "matchCount": 8
+    },
+    "nectar_blue": {
+      "label": "NECTAR (blue)",
+      "shape": "sphere",
+      "diameterM": 0.091,
+      "color": "#1f6feb",
+      "diameter_source": "Section 9.8: approximately 3.6 in (9.1 cm) polyethylene ball (am-5852_blue)",
+      "massKg": 0.041,
+      "mass_source": "inferred from the AndyMark listing (see POLLEN)",
+      "restitution": 0.5,
+      "friction": 0.5,
+      "rollingDamping": 0.6,
+      "linearDamping": 0.05,
+      "contact_source": "estimate",
+      "matchCount": 8
+    }
+  },
+  "zones": [
+    {
+      "id": "garden_red",
+      "label": "GARDEN (red)",
+      "color": "#d7263d",
+      "min": [
+        1.2087,
+        -1.7929
+      ],
+      "max": [
+        1.7929,
+        -1.7421
+      ],
+      "source": "Section 9.3 (23 in by 2 in); corner per Figure 9-2; wall position from the field CAD"
+    },
+    {
+      "id": "garden_blue",
+      "label": "GARDEN (blue)",
+      "color": "#1f6feb",
+      "min": [
+        -1.7929,
+        1.7421
+      ],
+      "max": [
+        -1.2087,
+        1.7929
+      ],
+      "source": "Section 9.3; Figure 9-2; field CAD"
+    },
+    {
+      "id": "loading_red",
+      "label": "LOADING ZONE (red)",
+      "color": "#d7263d",
+      "min": [
+        1.5135,
+        0.6095
+      ],
+      "max": [
+        1.7929,
+        1.1937
+      ],
+      "source": "Section 9.3 (23 in by 11 in); position along the wall read from Figure 9-2 (approximate)"
+    },
+    {
+      "id": "loading_blue",
+      "label": "LOADING ZONE (blue)",
+      "color": "#1f6feb",
+      "min": [
+        -1.7929,
+        -1.1937
+      ],
+      "max": [
+        -1.5135,
+        -0.6095
+      ],
+      "source": "Section 9.3; Figure 9-2 (approximate)"
+    }
+  ],
+  "structures": [
+    {
+      "id": "hive",
+      "label": "HIVE Structure (frame and two tipping HIVES)",
+      "simulated": true,
+      "source": "official field CAD"
+    },
+    {
+      "id": "flowers",
+      "label": "FLOWERS (4)",
+      "simulated": true,
+      "source": "official field CAD"
+    }
+  ],
+  "staging": {
+    "source": "official field CAD (matches Section 10.3.1 and Figure 10-2)",
+    "match": [
+      {
+        "type": "pollen",
+        "count": 4,
+        "where": "robot_preload",
+        "rule": "on the tiles touching the robot (allowed by Section 10.3.4)"
+      }
+    ],
+    "fromCad": "16 POLLEN stacked in the four FLOWERS, 4 in each GARDEN, 3 NECTAR in each upward-facing CELL",
+    "notStaged": [
+      "12 POLLEN pre-loaded with the three other robots (the CAD shows all 16 pre-loads outside the field)",
+      "10 NECTAR in the ALLIANCE AREAS (outside the field)"
+    ]
+  },
+  "collisionShapes": "/assets/field/field-collision.json",
+  "model": "/assets/field/biobuzz-field.glb",
+  "hive": {
+    "angularDamping": 1.5,
+    "note": "The real HIVE has soft-close dampers at the pivot; this damping value is an estimate. Mass and balance are estimated from CAD volumes (see the generated collision file)."
+  },
+  "robotStart": {
+    "x": -1.4129,
+    "y": 0.2936,
+    "headingDeg": 180,
+    "note": "Simulator default, not a rule: 12 cm off the audience wall, front toward the wall and back toward the red HIVE, since the StarterBot launches over its back. In the simulator roughly half the shots at the example code's 1250 ticks/s land in the red HIVE's raised CELL from this band (see scripts/shot-map.mjs); single shots are sensitive to millimetres."
+  }
+}

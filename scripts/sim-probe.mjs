@@ -1,0 +1,21 @@
+// Quick physics probe: prints chassis behaviour for a few standard manoeuvres.
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { Simulator } from '../server/sim.mjs';
+import { ROOT } from '../server/jdk.mjs';
+const robot = JSON.parse(readFileSync(join(ROOT, 'robots', 'biobuzz-starterbot.json'), 'utf8'));
+const f = (v, d = 3) => v.toFixed(d);
+const show = (label, sim) => { const s = sim.snapshot(); console.log(label.padEnd(26), 'x', f(s.pose.x), 'y', f(s.pose.y), 'hdg', f(s.pose.heading * 180 / Math.PI, 1), 'v', f(s.vel.v), 'yaw', f(s.vel.omega * 180 / Math.PI, 0), 'h', f(s.pose3d.p[1] * 1000, 2), 'pitch', f(s.tilt.pitchDeg, 2), 'roll', f(s.tilt.rollDeg, 2), 'loads', s.wheels.map((w) => f(w.loadN, 0)).join('/'), s.atWall ? 'WALL' : ''); };
+const run = (sim, l, r, secs) => { sim.setMotorCommand('left_drive', { power: l }); sim.setMotorCommand('right_drive', { power: -r }); for (let i = 0; i < secs * 1000; i++) sim.step(0.001); };
+let t0 = performance.now();
+let sim = new Simulator(robot); show('rest', sim);
+run(sim, 0, 0, 1); show('rest +1s', sim);
+run(sim, 1, 1, 0.1); show('full fwd 0.1s', sim);
+run(sim, 1, 1, 0.9); show('full fwd 1.0s', sim);
+run(sim, 0, 0, 0.3); show('brake 0.3s', sim);
+run(sim, 0, 0, 1); show('brake 1.3s', sim);
+sim = new Simulator(robot); run(sim, 1, -1, 1); show('spin right 1s', sim);
+sim = new Simulator(robot); run(sim, 1, 0.5, 1.5); show('arc 1.5s', sim);
+sim = new Simulator(robot); run(sim, 1, 1, 3); show('into wall 3s', sim);
+run(sim, -1, -1, 1); show('reverse 1s', sim);
+console.log('wall time ms for ~11 s of sim:', Math.round(performance.now() - t0));

@@ -1,0 +1,1700 @@
+{
+  "id": "gobilda-biobuzz-starterbot-6wd",
+  "source": {
+    "cad": "3200-2627-0003.step (goBILDA resource guide)",
+    "converter": "cadtools/step2glb.py (OpenCascade tessellation)",
+    "generatedBy": "cadtools/make-biobuzz-assembly.mjs"
+  },
+  "model": {
+    "url": "/assets/biobuzz/biobuzz-starterbot.glb",
+    "root": "3200-2627-0003",
+    "parts": 167,
+    "triangles": 3441022,
+    "units": "m",
+    "frame": {
+      "left": "+X",
+      "up": "+Y",
+      "front": "+Z"
+    }
+  },
+  "measured": {
+    "note": "Read from the official CAD geometry.",
+    "trackWidthM": 0.402,
+    "omniTrackWidthM": 0.397,
+    "axleZM": [
+      -0.144,
+      0,
+      0.144
+    ],
+    "wheelbaseM": 0.288,
+    "wheelRadiusM": 0.04793,
+    "frontAxleRiseM": 0.002,
+    "frontAxleRise_note": "Rear and middle (Hogback) axles are level; the front omni axle sits this much higher, so the robot rests on four wheels and rocks onto the omnis.",
+    "groundYM": -0.04793,
+    "frameFootprintM": {
+      "width": 0.37,
+      "length": 0.40164,
+      "minZ": -0.192,
+      "maxZ": 0.20964
+    },
+    "overallM": {
+      "width": 0.426,
+      "length": 0.4542,
+      "heightAboveGround": 0.32035,
+      "minZ": -0.1942,
+      "maxZ": 0.26
+    },
+    "batteryCenterM": [
+      -0.156,
+      0.05575,
+      -0.072
+    ]
+  },
+  "appearance": {
+    "note": "The STEP file carries colours only. These render-only rules add surface finish; they never change geometry.",
+    "byColor": [
+      {
+        "when": "light",
+        "metalness": 0.8,
+        "roughness": 0.42,
+        "meaning": "bare aluminium and steel"
+      },
+      {
+        "when": "dark",
+        "metalness": 0,
+        "roughness": 0.85,
+        "meaning": "rubber, anodized and plastic parts"
+      },
+      {
+        "when": "colored",
+        "metalness": 0.1,
+        "roughness": 0.6,
+        "meaning": "labels, motor cans, wiring"
+      }
+    ],
+    "byPart": [
+      {
+        "match": "^1117-",
+        "opacity": 0.38,
+        "metalness": 0,
+        "roughness": 0.15,
+        "color": [
+          0.85,
+          0.9,
+          0.95
+        ],
+        "meaning": "polycarbonate grid plates"
+      }
+    ]
+  },
+  "joints": [
+    {
+      "id": "intake_arm",
+      "type": "passive revolute",
+      "pivot": [
+        0,
+        0.048,
+        0.144
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "minLiftRad": 0,
+      "maxLiftRad": 0.6,
+      "dampingNmsPerRad": 0.02,
+      "limits_source": "estimate: the CAD pose is taken as the lower stop; the upper stop is not modelled in the CAD",
+      "parts": 38,
+      "massKg": 1.10843,
+      "comM": [
+        0,
+        0.07662,
+        0.17252
+      ],
+      "inertiaAboutPivotKgM2": 0.00245,
+      "mass_source": "estimate from CAD volumes and assumed densities (cadtools/materials.mjs)"
+    }
+  ],
+  "drivetrain": {
+    "note": "Each shaft is simulated with its own angle and speed. Tooth counts and positions are from the CAD (centre distances checked against MOD 0.8 teeth). Inertias are integrated from the CAD solids with assumed densities. Mesh stiffness, backlash, chain slack, efficiency and bearing friction are estimates.",
+    "shafts": [
+      {
+        "id": "left_drive_rotor",
+        "inertiaKgM2": 0.000003001,
+        "inertia_source": "estimate from CAD solids and assumed densities (5000-0002-0001 motor shaft:1: 0.7 g), plus 0.000003 kg m2 for the motor armature (estimate; the CAD only has its shaft)",
+        "frictionNm": 0,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "left_drive_pinion",
+        "inertiaKgM2": 6.162e-7,
+        "inertia_source": "estimate from CAD solids and assumed densities (2303-4008-0030:2: 7.4 g; 5103 Gearbox Shaft (Simple):1: 14.6 g)",
+        "frictionNm": 0,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "left_rear_axle",
+        "inertiaKgM2": 0.000141,
+        "inertia_source": "estimate from CAD solids and assumed densities (2106-4008-0800:4: 23.7 g; 1310-0016-4008:3: 19.2 g; 2303-4008-0030:1: 7.4 g; 3307-4008-0010:3: 5.6 g; 3626-0014-0096:1: 85.4 g)",
+        "frictionNm": 0.002,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "left_middle_axle",
+        "inertiaKgM2": 0.0001405,
+        "inertia_source": "estimate from CAD solids and assumed densities (2106-4008-0800:5: 23.7 g; 1310-0016-4008:4: 19.2 g; 3307-4008-0010:4: 5.6 g; 3626-0014-0096:2: 85.4 g)",
+        "frictionNm": 0.002,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "left_front_axle",
+        "inertiaKgM2": 0.000133,
+        "inertia_source": "estimate from CAD solids and assumed densities (2106-4008-0800:6: 23.7 g; 1309-0016-4008:2: 10.9 g; 3624-0014-0096:2: 94.5 g)",
+        "frictionNm": 0.002,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "right_drive_rotor",
+        "inertiaKgM2": 0.000003001,
+        "inertia_source": "estimate from CAD solids and assumed densities (5000-0002-0001 motor shaft:1: 0.7 g), plus 0.000003 kg m2 for the motor armature (estimate; the CAD only has its shaft)",
+        "frictionNm": 0,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "right_drive_pinion",
+        "inertiaKgM2": 6.162e-7,
+        "inertia_source": "estimate from CAD solids and assumed densities (2303-4008-0030:4: 7.4 g; 5103 Gearbox Shaft (Simple):1: 14.6 g)",
+        "frictionNm": 0,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "right_rear_axle",
+        "inertiaKgM2": 0.000141,
+        "inertia_source": "estimate from CAD solids and assumed densities (2106-4008-0800:1: 23.7 g; 1310-0016-4008:1: 19.2 g; 2303-4008-0030:3: 7.4 g; 3307-4008-0010:1: 5.6 g; 3626-0014-0096:3: 85.4 g)",
+        "frictionNm": 0.002,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "right_middle_axle",
+        "inertiaKgM2": 0.0001405,
+        "inertia_source": "estimate from CAD solids and assumed densities (2106-4008-0800:2: 23.7 g; 1310-0016-4008:2: 19.2 g; 3307-4008-0010:2: 5.6 g; 3626-0014-0096:4: 85.4 g)",
+        "frictionNm": 0.002,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "right_front_axle",
+        "inertiaKgM2": 0.0001331,
+        "inertia_source": "estimate from CAD solids and assumed densities (2106-4008-0800:3: 23.7 g; 1309-0016-4008:1: 10.9 g; 3624-0014-0096:1: 94.5 g)",
+        "frictionNm": 0.002,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "launcher_shaft",
+        "inertiaKgM2": 0.0001501,
+        "inertia_source": "estimate from CAD solids and assumed densities (1310-0016-4008:5: 19.2 g; 3626-0014-0096:5: 85.4 g; 5103 Gearbox Shaft (Simple):1: 14.6 g; 5000-0002-0001 motor shaft:1: 0.7 g), plus 0.00001 kg m2 for the motor armature at 1:1",
+        "frictionNm": 0,
+        "viscousNmPerRadS": 0.00002
+      },
+      {
+        "id": "intake_rotor",
+        "inertiaKgM2": 0.000003001,
+        "inertia_source": "estimate from CAD solids and assumed densities (5000-0002-0001 motor shaft:1: 0.7 g), plus 0.000003 kg m2 for the motor armature (estimate)",
+        "frictionNm": 0,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "intake_gear",
+        "inertiaKgM2": 0.0000376,
+        "inertia_source": "estimate from CAD solids and assumed densities (1309-0016-4008:5: 10.9 g; 2302-0014-0100:1: 38.3 g; 5103 Gearbox Shaft (Simple):1: 14.6 g)",
+        "frictionNm": 0.002,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "intake_gecko_shaft",
+        "inertiaKgM2": 0.00003986,
+        "inertia_source": "estimate from CAD solids and assumed densities (2106-4008-2400:1: 78.1 g; 1522-0010-0120:1: 0.8 g; 3613-4008-0048:1: 17.9 g; 1522-0010-0120:2: 0.8 g; 3613-4008-0048:2: 17.9 g; 1522-0010-0120:3: 0.8 g; 3613-4008-0048:3: 17.9 g; 1522-0010-0120:4: 0.8 g; 3613-4008-0048:5: 17.9 g; 1522-0010-0120:6: 0.8 g; 3613-4008-0048:4: 17.9 g; 1522-0010-0120:5: 0.8 g; 3613-4008-0048:8: 17.9 g; 1522-0010-0120:9: 0.8 g; 3613-4008-0048:7: 17.9 g; 2920-0001-4008:3: 2.8 g; 2920-0001-4008:4: 2.8 g; 2303-4008-0020:1: 4.7 g)",
+        "frictionNm": 0.004,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "left_intake_servo_wheel",
+        "inertiaKgM2": 0.001542,
+        "inertia_source": "estimate from CAD solids and assumed densities (3613-0014-0072:2: 55.9 g; H25T Spline:1: 1.7 g), plus 0.0015 kg m2 for the servo's own motor and gears seen at its output (estimate)",
+        "frictionNm": 0,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "right_intake_servo_wheel",
+        "inertiaKgM2": 0.001542,
+        "inertia_source": "estimate from CAD solids and assumed densities (3613-0014-0072:1: 55.9 g; H25T Spline:1: 1.7 g), plus 0.0015 kg m2 for the servo's own motor and gears seen at its output (estimate)",
+        "frictionNm": 0,
+        "viscousNmPerRadS": 0
+      },
+      {
+        "id": "windmill",
+        "inertiaKgM2": 0.001552,
+        "inertia_source": "estimate from CAD solids and assumed densities (1201-0043-0002:6: 16.6 g; 1117-0040-0352 (3200-2627-0003_A):1: 5.6 g; 1117-0040-0352 (3200-2627-0003_A):2: 5.6 g; 1117-0040-0352 (3200-2627-0003_A):3: 5.6 g; 1117-0040-0352 (3200-2627-0003_A):4: 5.6 g; H25T Spline:1: 2.0 g), plus 0.0015 kg m2 for the servo's own motor and gears seen at its output (estimate)",
+        "frictionNm": 0,
+        "viscousNmPerRadS": 0
+      }
+    ],
+    "couplings": [
+      {
+        "id": "left_drive_gearbox",
+        "a": "left_drive_rotor",
+        "b": "left_drive_pinion",
+        "type": "gearbox",
+        "ratio": 19.2,
+        "stiffnessNmPerRad": 400,
+        "dampingNmsPerRad": 0.05,
+        "backlashRad": 0.012,
+        "efficiency": 1,
+        "label": "Yellow Jacket 19.2:1 planetary gearbox (internal gears are not in the CAD; modelled as one stage)"
+      },
+      {
+        "id": "left_drive_mesh",
+        "a": "left_drive_pinion",
+        "b": "left_rear_axle",
+        "type": "gear",
+        "moduleMm": 0.8,
+        "stiffnessNPerM": 2000000,
+        "dampingNsPerM": 40,
+        "backlashM": 0.0001,
+        "efficiency": 0.97,
+        "teethA": 30,
+        "teethB": 30,
+        "label": "30T pinion on 30T axle gear"
+      },
+      {
+        "id": "left_drive_chain",
+        "a": "left_rear_axle",
+        "b": "left_middle_axle",
+        "type": "chain",
+        "pitchMm": 8,
+        "teethA": 10,
+        "teethB": 10,
+        "stiffnessNPerM": 200000,
+        "dampingNsPerM": 20,
+        "slackM": 0.0008,
+        "efficiency": 0.96,
+        "label": "8 mm plastic chain loop on two 10T sprockets"
+      },
+      {
+        "id": "right_drive_gearbox",
+        "a": "right_drive_rotor",
+        "b": "right_drive_pinion",
+        "type": "gearbox",
+        "ratio": 19.2,
+        "stiffnessNmPerRad": 400,
+        "dampingNmsPerRad": 0.05,
+        "backlashRad": 0.012,
+        "efficiency": 1,
+        "label": "Yellow Jacket 19.2:1 planetary gearbox (internal gears are not in the CAD; modelled as one stage)"
+      },
+      {
+        "id": "right_drive_mesh",
+        "a": "right_drive_pinion",
+        "b": "right_rear_axle",
+        "type": "gear",
+        "moduleMm": 0.8,
+        "stiffnessNPerM": 2000000,
+        "dampingNsPerM": 40,
+        "backlashM": 0.0001,
+        "efficiency": 0.97,
+        "teethA": 30,
+        "teethB": 30,
+        "label": "30T pinion on 30T axle gear"
+      },
+      {
+        "id": "right_drive_chain",
+        "a": "right_rear_axle",
+        "b": "right_middle_axle",
+        "type": "chain",
+        "pitchMm": 8,
+        "teethA": 10,
+        "teethB": 10,
+        "stiffnessNPerM": 200000,
+        "dampingNsPerM": 20,
+        "slackM": 0.0008,
+        "efficiency": 0.96,
+        "label": "8 mm plastic chain loop on two 10T sprockets"
+      },
+      {
+        "id": "intake_gearbox",
+        "a": "intake_rotor",
+        "b": "intake_gear",
+        "type": "gearbox",
+        "ratio": 50.9,
+        "stiffnessNmPerRad": 400,
+        "dampingNmsPerRad": 0.05,
+        "backlashRad": 0.012,
+        "efficiency": 1,
+        "label": "Yellow Jacket 50.9:1 planetary gearbox (modelled as one stage)"
+      },
+      {
+        "id": "intake_mesh",
+        "a": "intake_gear",
+        "b": "intake_gecko_shaft",
+        "type": "gear",
+        "moduleMm": 0.8,
+        "stiffnessNPerM": 2000000,
+        "dampingNsPerM": 40,
+        "backlashM": 0.0001,
+        "efficiency": 0.97,
+        "teethA": 100,
+        "teethB": 20,
+        "label": "100T gear on 20T pinion (the Gecko shaft turns 5 times faster, the other way)"
+      }
+    ],
+    "actuators": {
+      "left_drive": {
+        "type": "motor",
+        "rotor": "left_drive_rotor",
+        "sign": -1,
+        "gearbox": 19.2
+      },
+      "right_drive": {
+        "type": "motor",
+        "rotor": "right_drive_rotor",
+        "sign": 1,
+        "gearbox": 19.2
+      },
+      "launcher": {
+        "type": "motor",
+        "rotor": "launcher_shaft",
+        "sign": 1,
+        "gearbox": 1
+      },
+      "intake": {
+        "type": "motor",
+        "rotor": "intake_rotor",
+        "sign": -1,
+        "gearbox": 50.9
+      },
+      "left_intake_servo": {
+        "type": "servo",
+        "shaft": "left_intake_servo_wheel",
+        "sign": -1
+      },
+      "right_intake_servo": {
+        "type": "servo",
+        "shaft": "right_intake_servo_wheel",
+        "sign": -1
+      },
+      "windmill": {
+        "type": "servo",
+        "shaft": "windmill",
+        "sign": -1
+      }
+    }
+  },
+  "mechanisms": [
+    {
+      "id": "intake_gecko_1",
+      "kind": "roller",
+      "hardware": "intake",
+      "shaft": "intake_gecko_shaft",
+      "center": [
+        -0.0903,
+        0.04519,
+        0.18699
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "radius": 0.024,
+      "width": 0.016,
+      "stiffnessNPerM": 1500,
+      "friction": 1,
+      "joint": "intake_arm"
+    },
+    {
+      "id": "intake_gecko_2",
+      "kind": "roller",
+      "hardware": "intake",
+      "shaft": "intake_gecko_shaft",
+      "center": [
+        -0.0623,
+        0.04519,
+        0.18699
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "radius": 0.024,
+      "width": 0.016,
+      "stiffnessNPerM": 1500,
+      "friction": 1,
+      "joint": "intake_arm"
+    },
+    {
+      "id": "intake_gecko_3",
+      "kind": "roller",
+      "hardware": "intake",
+      "shaft": "intake_gecko_shaft",
+      "center": [
+        -0.0343,
+        0.04519,
+        0.18699
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "radius": 0.024,
+      "width": 0.016,
+      "stiffnessNPerM": 1500,
+      "friction": 1,
+      "joint": "intake_arm"
+    },
+    {
+      "id": "intake_gecko_4",
+      "kind": "roller",
+      "hardware": "intake",
+      "shaft": "intake_gecko_shaft",
+      "center": [
+        -0.0063,
+        0.04519,
+        0.18699
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "radius": 0.024,
+      "width": 0.016,
+      "stiffnessNPerM": 1500,
+      "friction": 1,
+      "joint": "intake_arm"
+    },
+    {
+      "id": "intake_gecko_5",
+      "kind": "roller",
+      "hardware": "intake",
+      "shaft": "intake_gecko_shaft",
+      "center": [
+        0.0217,
+        0.04519,
+        0.18699
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "radius": 0.024,
+      "width": 0.016,
+      "stiffnessNPerM": 1500,
+      "friction": 1,
+      "joint": "intake_arm"
+    },
+    {
+      "id": "intake_gecko_6",
+      "kind": "roller",
+      "hardware": "intake",
+      "shaft": "intake_gecko_shaft",
+      "center": [
+        0.0497,
+        0.04519,
+        0.18699
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "radius": 0.024,
+      "width": 0.016,
+      "stiffnessNPerM": 1500,
+      "friction": 1,
+      "joint": "intake_arm"
+    },
+    {
+      "id": "intake_gecko_7",
+      "kind": "roller",
+      "hardware": "intake",
+      "shaft": "intake_gecko_shaft",
+      "center": [
+        0.0777,
+        0.04519,
+        0.18699
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "radius": 0.024,
+      "width": 0.016,
+      "stiffnessNPerM": 1500,
+      "friction": 1,
+      "joint": "intake_arm"
+    },
+    {
+      "id": "lower_roller",
+      "kind": "roller",
+      "hardware": null,
+      "shaft": null,
+      "center": [
+        0,
+        -0.008,
+        0.128
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "radius": 0.0085,
+      "width": 0.256,
+      "stiffnessNPerM": 8000,
+      "friction": 1,
+      "note": "This shaft has no bearings in the CAD (all 18 are on the drive axles, intake pivots and Gecko shaft), so it is modelled as a fixed bar. Its silicone sleeves give a spinning ball the grip to climb over it."
+    },
+    {
+      "id": "launcher_flywheel",
+      "kind": "roller",
+      "hardware": "launcher",
+      "shaft": "launcher_shaft",
+      "center": [
+        -0.0045,
+        0.12,
+        -0.04
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "radius": 0.04793,
+      "width": 0.024,
+      "stiffnessNPerM": 6000,
+      "friction": 0.9,
+      "dampingRatio": 1,
+      "dampingRatio_note": "The ball is gripped for only about 25 ms. With light damping the squeeze rings and the ball leaves at a different angle each shot; a squashy hollow ball is assumed to settle without ringing (estimate)."
+    },
+    {
+      "id": "left_intake_servo_wheel",
+      "kind": "roller",
+      "hardware": "left_intake_servo",
+      "shaft": "left_intake_servo_wheel",
+      "center": [
+        0.156,
+        -0.013,
+        0.224
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "radius": 0.036,
+      "width": 0.024,
+      "stiffnessNPerM": 500,
+      "friction": 1
+    },
+    {
+      "id": "right_intake_servo_wheel",
+      "kind": "roller",
+      "hardware": "right_intake_servo",
+      "shaft": "right_intake_servo_wheel",
+      "center": [
+        -0.156,
+        -0.013,
+        0.224
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "radius": 0.036,
+      "width": 0.024,
+      "stiffnessNPerM": 500,
+      "friction": 1
+    },
+    {
+      "id": "windmill",
+      "kind": "blades",
+      "hardware": "windmill",
+      "shaft": "windmill",
+      "pivot": [
+        -0.068,
+        0.0525,
+        0.04
+      ],
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "blades": [
+        {
+          "center": [
+            -0.09025,
+            0.0525,
+            0.068
+          ],
+          "half": [
+            0.0015,
+            0.02,
+            0.048
+          ]
+        },
+        {
+          "center": [
+            -0.04,
+            0.0525,
+            0.06225
+          ],
+          "half": [
+            0.048,
+            0.02,
+            0.0015
+          ]
+        },
+        {
+          "center": [
+            -0.04575,
+            0.0525,
+            0.012
+          ],
+          "half": [
+            0.0015,
+            0.02,
+            0.048
+          ]
+        },
+        {
+          "center": [
+            -0.096,
+            0.0525,
+            0.01775
+          ],
+          "half": [
+            0.048,
+            0.02,
+            0.0015
+          ]
+        }
+      ],
+      "stiffnessNPerM": 8000,
+      "friction": 0.4,
+      "dampingRatio": 0.7
+    }
+  ],
+  "mechanisms_note": "Radii and positions are from the CAD. Contact stiffness and friction are estimates (soft GripForce wheels and a slightly squashy ball); tune them against the real robot.",
+  "collisionShapes": "/assets/biobuzz/collision.json",
+  "notInCad": [
+    "REV Control Hub",
+    "wiring",
+    "the 1:1 launcher gearbox conversion (CAD shows a stock 19.2:1 motor)"
+  ],
+  "notAnimated": [
+    "plastic chain loops (drawn static; their pull and slack are simulated)",
+    "gears inside the motor gearboxes and servos (not in the CAD; each is simulated as one stage)",
+    "fasteners merged into the \"Hardware\" part"
+  ],
+  "chassis": {
+    "id": "chassis",
+    "label": "Static chassis (structure, plates, bearings, battery, fasteners)",
+    "nodes": [
+      "1120-0015-0384:1",
+      "1120-0015-0384:2",
+      "1205-0001-0005:1",
+      "1205-0001-0005:2",
+      "1205-0001-0005:3",
+      "1205-0001-0005:4",
+      "1121-0010-0264:1",
+      "1121-0010-0264:2",
+      "1616-0016-0002:1",
+      "1616-0016-0002:2",
+      "1616-0016-0002:3",
+      "1616-0016-0002:4",
+      "1611-0514-4008:1",
+      "1611-0514-4008:2",
+      "1611-0514-4008:3",
+      "1611-0514-4008:4",
+      "1611-0514-4008:5",
+      "1611-0514-4008:6",
+      "1611-0514-4008:7",
+      "1611-0514-4008:8",
+      "1611-0514-4008:9",
+      "1611-0514-4008:10",
+      "1611-0514-4008:11",
+      "1611-0514-4008:12",
+      "2807-0811-0500:1",
+      "2807-0811-0500:3",
+      "2807-0811-0500:4",
+      "2807-0811-0500:2",
+      "2807-0811-0500:5",
+      "2807-0811-0500:6",
+      "3309-0108 Loop (10T-10T, 144mm):1",
+      "3309-0108 Loop (10T-10T, 144mm):2",
+      "1120-0001-0048:1",
+      "1120-0001-0048:2",
+      "1611-0514-4008:13",
+      "1611-0514-4008:14",
+      "1611-0514-4008:15",
+      "1611-0514-4008:16",
+      "1516-4008-0240:1",
+      "1516-4008-0430:1",
+      "1502-0006-0110:1",
+      "1502-0006-0110:2",
+      "1502-0006-0110:3",
+      "1502-0006-0110:4",
+      "3217-0001-2501 w.Hardware (2.6):1",
+      "3217-0001-2501 w.Hardware (2.6):2",
+      "1201-0043-0002:2",
+      "1201-0043-0002:3",
+      "1120-0010-0264:1",
+      "1120-0010-0264:2",
+      "1120-0002-0072:1",
+      "1201-0043-0002:4",
+      "1201-0043-0002:5",
+      "1121-0005-0144:1",
+      "3217-0001-2501 w.Hardware (2.6):3",
+      "1121-0005-0144:2",
+      "1209-0001-0001 w.Strap w.Hardware:1",
+      "3100-0012-0020:1",
+      "1117-0040-0352 (3200-2627-0003_D):1",
+      "1117-0040-0352 (3200-2627-0003_C):1",
+      "1117-0040-0352 (3200-2627-0003_C):2",
+      "1117-0088-0352 (3200-2627-0003_F):1",
+      "1117-0088-0352 (3200-2627-0003_G):1",
+      "1117-0088-0352 (3200-2627-0003_E):1",
+      "1117-0040-0352 (3200-2627-0003_B):2",
+      "1117-0216-0352 (3200-2627-0003_H):1",
+      "1501-0006-0430:5",
+      "1501-0006-0430:6",
+      "1501-0006-0430:7",
+      "Hardware:1",
+      "Zip-Ties:1"
+    ],
+    "collision": {
+      "shape": "box",
+      "min": [
+        -0.185,
+        -0.024,
+        -0.192
+      ],
+      "max": [
+        0.185,
+        0.27242,
+        0.20964
+      ]
+    }
+  },
+  "components": [
+    {
+      "id": "left_rear_wheel",
+      "label": "Left rear wheel (96 mm Hogback) with axle, hub, sprocket/gear",
+      "nodes": [
+        "2106-4008-0800:4",
+        "1310-0016-4008:3",
+        "2303-4008-0030:1",
+        "3307-4008-0010:3",
+        "3626-0014-0096:1"
+      ],
+      "movable": true,
+      "parent": "chassis",
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          0.201,
+          0,
+          -0.144
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "left_drive",
+        "shaft": "left_rear_axle",
+        "ratio": 1,
+        "of": "own shaft angle"
+      },
+      "collision": {
+        "shape": "cylinder",
+        "radius": 0.04793,
+        "width": 0.024,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "center": [
+          0.201,
+          0,
+          -0.144
+        ],
+        "kind": "traction"
+      },
+      "wheel": {
+        "side": "left",
+        "position": "rear",
+        "type": "traction"
+      }
+    },
+    {
+      "id": "left_middle_wheel",
+      "label": "Left middle wheel (96 mm Hogback) with axle, hub, sprocket/gear",
+      "nodes": [
+        "2106-4008-0800:5",
+        "1310-0016-4008:4",
+        "3307-4008-0010:4",
+        "3626-0014-0096:2"
+      ],
+      "movable": true,
+      "parent": "chassis",
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          0.201,
+          0,
+          0
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "left_drive",
+        "shaft": "left_middle_axle",
+        "ratio": 1,
+        "of": "own shaft angle"
+      },
+      "collision": {
+        "shape": "cylinder",
+        "radius": 0.04793,
+        "width": 0.024,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "center": [
+          0.201,
+          0,
+          0
+        ],
+        "kind": "traction"
+      },
+      "wheel": {
+        "side": "left",
+        "position": "middle",
+        "type": "traction"
+      }
+    },
+    {
+      "id": "left_front_wheel",
+      "label": "Left front wheel (96 mm omni) with axle, hub, sprocket/gear",
+      "nodes": [
+        "2106-4008-0800:6",
+        "1309-0016-4008:2",
+        "3624-0014-0096:2"
+      ],
+      "movable": true,
+      "parent": "chassis",
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          0.1985,
+          0.002,
+          0.144
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": null,
+        "shaft": "left_front_axle",
+        "ratio": 1,
+        "of": "own shaft angle",
+        "note": "No sprocket or chain reaches the front axle in the CAD: the omni wheels roll freely."
+      },
+      "collision": {
+        "shape": "cylinder",
+        "radius": 0.04793,
+        "width": 0.024,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "center": [
+          0.1985,
+          0.002,
+          0.144
+        ],
+        "kind": "omni"
+      },
+      "wheel": {
+        "side": "left",
+        "position": "front",
+        "type": "omni"
+      }
+    },
+    {
+      "id": "left_drive_motor_gear",
+      "label": "left drive motor output shaft and pinion (30T, meshes 1:1 with the rear axle gear)",
+      "nodes": [
+        "2303-4008-0030:2",
+        "5203-2402-0019:1/5103-0024-0019:1/5103 Gearbox Shaft (Simple):1"
+      ],
+      "movable": true,
+      "parent": "chassis",
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          0.143,
+          0,
+          -0.168
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "left_drive",
+        "shaft": "left_drive_pinion",
+        "ratio": 1,
+        "of": "own shaft angle"
+      },
+      "collision": null
+    },
+    {
+      "id": "left_drive_rotor",
+      "label": "left drive motor rotor (turns 19.2 times per output turn; only its shaft is in the CAD)",
+      "nodes": [
+        "5203-2402-0019:1/5000-0002-0001 Motor:1/5000-0002-0001 motor shaft:1"
+      ],
+      "movable": true,
+      "parent": "chassis",
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          0.143,
+          0,
+          -0.168
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "left_drive",
+        "shaft": "left_drive_rotor",
+        "ratio": 1,
+        "of": "own shaft angle"
+      },
+      "collision": null
+    },
+    {
+      "id": "left_drive_motor",
+      "label": "left drive motor (5203 Yellow Jacket 19.2:1)",
+      "nodes": [
+        "5203-2402-0019:1"
+      ],
+      "movable": false,
+      "parent": "chassis",
+      "hardware": "left_drive",
+      "collision": null
+    },
+    {
+      "id": "right_rear_wheel",
+      "label": "Right rear wheel (96 mm Hogback) with axle, hub, sprocket/gear",
+      "nodes": [
+        "2106-4008-0800:1",
+        "1310-0016-4008:1",
+        "2303-4008-0030:3",
+        "3307-4008-0010:1",
+        "3626-0014-0096:3"
+      ],
+      "movable": true,
+      "parent": "chassis",
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          -0.201,
+          0,
+          -0.144
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "right_drive",
+        "shaft": "right_rear_axle",
+        "ratio": 1,
+        "of": "own shaft angle"
+      },
+      "collision": {
+        "shape": "cylinder",
+        "radius": 0.04793,
+        "width": 0.024,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "center": [
+          -0.201,
+          0,
+          -0.144
+        ],
+        "kind": "traction"
+      },
+      "wheel": {
+        "side": "right",
+        "position": "rear",
+        "type": "traction"
+      }
+    },
+    {
+      "id": "right_middle_wheel",
+      "label": "Right middle wheel (96 mm Hogback) with axle, hub, sprocket/gear",
+      "nodes": [
+        "2106-4008-0800:2",
+        "1310-0016-4008:2",
+        "3307-4008-0010:2",
+        "3626-0014-0096:4"
+      ],
+      "movable": true,
+      "parent": "chassis",
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          -0.201,
+          0,
+          0
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "right_drive",
+        "shaft": "right_middle_axle",
+        "ratio": 1,
+        "of": "own shaft angle"
+      },
+      "collision": {
+        "shape": "cylinder",
+        "radius": 0.04793,
+        "width": 0.024,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "center": [
+          -0.201,
+          0,
+          0
+        ],
+        "kind": "traction"
+      },
+      "wheel": {
+        "side": "right",
+        "position": "middle",
+        "type": "traction"
+      }
+    },
+    {
+      "id": "right_front_wheel",
+      "label": "Right front wheel (96 mm omni) with axle, hub, sprocket/gear",
+      "nodes": [
+        "2106-4008-0800:3",
+        "1309-0016-4008:1",
+        "3624-0014-0096:1"
+      ],
+      "movable": true,
+      "parent": "chassis",
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          -0.1985,
+          0.002,
+          0.144
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": null,
+        "shaft": "right_front_axle",
+        "ratio": 1,
+        "of": "own shaft angle",
+        "note": "No sprocket or chain reaches the front axle in the CAD: the omni wheels roll freely."
+      },
+      "collision": {
+        "shape": "cylinder",
+        "radius": 0.04793,
+        "width": 0.024,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "center": [
+          -0.1985,
+          0.002,
+          0.144
+        ],
+        "kind": "omni"
+      },
+      "wheel": {
+        "side": "right",
+        "position": "front",
+        "type": "omni"
+      }
+    },
+    {
+      "id": "right_drive_motor_gear",
+      "label": "right drive motor output shaft and pinion (30T, meshes 1:1 with the rear axle gear)",
+      "nodes": [
+        "2303-4008-0030:4",
+        "5203-2402-0019:2/5103-0024-0019:1/5103 Gearbox Shaft (Simple):1"
+      ],
+      "movable": true,
+      "parent": "chassis",
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          -0.143,
+          0,
+          -0.168
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "right_drive",
+        "shaft": "right_drive_pinion",
+        "ratio": 1,
+        "of": "own shaft angle"
+      },
+      "collision": null
+    },
+    {
+      "id": "right_drive_rotor",
+      "label": "right drive motor rotor (turns 19.2 times per output turn; only its shaft is in the CAD)",
+      "nodes": [
+        "5203-2402-0019:2/5000-0002-0001 Motor:1/5000-0002-0001 motor shaft:1"
+      ],
+      "movable": true,
+      "parent": "chassis",
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          -0.143,
+          0,
+          -0.168
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "right_drive",
+        "shaft": "right_drive_rotor",
+        "ratio": 1,
+        "of": "own shaft angle"
+      },
+      "collision": null
+    },
+    {
+      "id": "right_drive_motor",
+      "label": "right drive motor (5203 Yellow Jacket 19.2:1)",
+      "nodes": [
+        "5203-2402-0019:2"
+      ],
+      "movable": false,
+      "parent": "chassis",
+      "hardware": "right_drive",
+      "collision": null
+    },
+    {
+      "id": "launcher_flywheel",
+      "label": "Launcher flywheel (96 mm Hogback wheel on Hyper Hub) with the motor shaft it is clamped to",
+      "movable": true,
+      "parent": "chassis",
+      "nodes": [
+        "1310-0016-4008:5",
+        "3626-0014-0096:5",
+        "5203-2402-0019:3/5103-0024-0019:1/5103 Gearbox Shaft (Simple):1",
+        "5203-2402-0019:3/5000-0002-0001 Motor:1/5000-0002-0001 motor shaft:1"
+      ],
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          -0.0045,
+          0.12,
+          -0.04
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "launcher",
+        "shaft": "launcher_shaft",
+        "ratio": 1,
+        "of": "own shaft angle",
+        "note": "Direction derived from geometry: positive velocity moves the underside of the wheel rearward, carrying POLLEN up the curved ramp behind it and out over the back of the robot."
+      },
+      "collision": {
+        "shape": "cylinder",
+        "radius": 0.04793,
+        "width": 0.024,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "center": [
+          -0.0045,
+          0.11994,
+          -0.04
+        ],
+        "kind": "flywheel"
+      }
+    },
+    {
+      "id": "launcher_motor",
+      "label": "Launcher motor (5203 Yellow Jacket, converted to 1:1 per assembly step 44; the CAD shows the stock gearbox)",
+      "nodes": [
+        "5203-2402-0019:3"
+      ],
+      "movable": false,
+      "parent": "chassis",
+      "hardware": "launcher",
+      "collision": null
+    },
+    {
+      "id": "intake_motor",
+      "label": "Intake motor (5203 Yellow Jacket 50.9:1)",
+      "nodes": [
+        "5203-2402-0051:1"
+      ],
+      "movable": false,
+      "parent": "intake_arm",
+      "hardware": "intake",
+      "collision": null
+    },
+    {
+      "id": "intake_drive_gear",
+      "label": "Intake motor output shaft with the 100T gear",
+      "movable": true,
+      "parent": "intake_arm",
+      "nodes": [
+        "1309-0016-4008:5",
+        "2302-0014-0100:1",
+        "5203-2402-0051:1/5103-0024-0051:1/5103 Gearbox Shaft (Simple):1"
+      ],
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          0.125,
+          0.09083,
+          0.1721
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "intake",
+        "shaft": "intake_gear",
+        "ratio": 1,
+        "of": "own shaft angle"
+      },
+      "collision": null
+    },
+    {
+      "id": "intake_rotor",
+      "label": "Intake motor rotor (turns 50.9 times per output turn; only its shaft is in the CAD)",
+      "movable": true,
+      "parent": "intake_arm",
+      "nodes": [
+        "5203-2402-0051:1/5000-0002-0001 Motor:1/5000-0002-0001 motor shaft:1"
+      ],
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          0.125,
+          0.09083,
+          0.1721
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "intake",
+        "shaft": "intake_rotor",
+        "ratio": 1,
+        "of": "own shaft angle"
+      },
+      "collision": null
+    },
+    {
+      "id": "intake_gecko_shaft",
+      "label": "Intake shaft: 7 x 48 mm GripForce Gecko wheels, driven 100T:20T",
+      "movable": true,
+      "parent": "intake_arm",
+      "nodes": [
+        "2106-4008-2400:1",
+        "1522-0010-0120:1",
+        "3613-4008-0048:1",
+        "1522-0010-0120:2",
+        "3613-4008-0048:2",
+        "1522-0010-0120:3",
+        "3613-4008-0048:3",
+        "1522-0010-0120:4",
+        "3613-4008-0048:5",
+        "1522-0010-0120:6",
+        "3613-4008-0048:4",
+        "1522-0010-0120:5",
+        "3613-4008-0048:8",
+        "1522-0010-0120:9",
+        "3613-4008-0048:7",
+        "2920-0001-4008:3",
+        "2920-0001-4008:4",
+        "2303-4008-0020:1"
+      ],
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          0,
+          0.04519,
+          0.18699
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "intake",
+        "shaft": "intake_gecko_shaft",
+        "ratio": 1,
+        "of": "own shaft angle",
+        "note": "Positive intake power moves the underside of the wheels toward the robot."
+      },
+      "collision": {
+        "shape": "cylinder",
+        "radius": 0.024,
+        "width": 0.184,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "center": [
+          -0.0063,
+          0.04519,
+          0.18699
+        ],
+        "kind": "intake-roller"
+      }
+    },
+    {
+      "id": "lower_roller",
+      "label": "Lower roller: 16 intake roller sleeves on the 264 mm shaft",
+      "movable": false,
+      "parent": "chassis",
+      "nodes": [
+        "2106-4008-2640:1",
+        "3618-4008-0016 (Stretched over 8 REX):1",
+        "3618-4008-0016 (Stretched over 8 REX):2",
+        "3618-4008-0016 (Stretched over 8 REX):3",
+        "3618-4008-0016 (Stretched over 8 REX):4",
+        "3618-4008-0016 (Stretched over 8 REX):5",
+        "3618-4008-0016 (Stretched over 8 REX):6",
+        "3618-4008-0016 (Stretched over 8 REX):7",
+        "3618-4008-0016 (Stretched over 8 REX):8",
+        "3618-4008-0016 (Stretched over 8 REX):9",
+        "3618-4008-0016 (Stretched over 8 REX):10",
+        "3618-4008-0016 (Stretched over 8 REX):11",
+        "3618-4008-0016 (Stretched over 8 REX):12",
+        "3618-4008-0016 (Stretched over 8 REX):13",
+        "3618-4008-0016 (Stretched over 8 REX):14",
+        "3618-4008-0016 (Stretched over 8 REX):15",
+        "3618-4008-0016 (Stretched over 8 REX):16"
+      ],
+      "note": "No gear, chain, motor or bearing connects to this shaft in the CAD, so it is treated as a fixed, grippy bar.",
+      "collision": {
+        "shape": "cylinder",
+        "radius": 0.0085,
+        "width": 0.264,
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "center": [
+          0,
+          -0.008,
+          0.128
+        ],
+        "kind": "passive-roller"
+      }
+    },
+    {
+      "id": "left_intake_servo_wheel",
+      "label": "left corner intake wheel (72 mm GripForce Gecko) on the speed servo's output spline",
+      "nodes": [
+        "3613-0014-0072:2",
+        "2000-0025-0003:2/H25T Spline:1"
+      ],
+      "movable": true,
+      "parent": "chassis",
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          0.156,
+          -0.013,
+          0.224
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "left_intake_servo",
+        "shaft": "left_intake_servo_wheel",
+        "ratio": 1,
+        "of": "own shaft angle",
+        "note": "With the official code, intake power turns the inner edge of each wheel toward the robot."
+      },
+      "collision": {
+        "shape": "cylinder",
+        "radius": 0.036,
+        "width": 0.024,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "center": [
+          0.156,
+          -0.013,
+          0.224
+        ],
+        "kind": "intake-roller"
+      }
+    },
+    {
+      "id": "left_intake_servo",
+      "label": "left intake servo (2000-0025-0003 speed)",
+      "nodes": [
+        "2000-0025-0003:2"
+      ],
+      "movable": false,
+      "parent": "chassis",
+      "hardware": "left_intake_servo",
+      "collision": null
+    },
+    {
+      "id": "right_intake_servo_wheel",
+      "label": "right corner intake wheel (72 mm GripForce Gecko) on the speed servo's output spline",
+      "nodes": [
+        "3613-0014-0072:1",
+        "2000-0025-0003:1/H25T Spline:1"
+      ],
+      "movable": true,
+      "parent": "chassis",
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          -0.156,
+          -0.013,
+          0.224
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "right_intake_servo",
+        "shaft": "right_intake_servo_wheel",
+        "ratio": 1,
+        "of": "own shaft angle",
+        "note": "With the official code, intake power turns the inner edge of each wheel toward the robot."
+      },
+      "collision": {
+        "shape": "cylinder",
+        "radius": 0.036,
+        "width": 0.024,
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "center": [
+          -0.156,
+          -0.013,
+          0.224
+        ],
+        "kind": "intake-roller"
+      }
+    },
+    {
+      "id": "right_intake_servo",
+      "label": "right intake servo (2000-0025-0003 speed)",
+      "nodes": [
+        "2000-0025-0003:1"
+      ],
+      "movable": false,
+      "parent": "chassis",
+      "hardware": "right_intake_servo",
+      "collision": null
+    },
+    {
+      "id": "windmill",
+      "label": "Windmill feeder: 4 gridplate blades on the torque servo",
+      "movable": true,
+      "parent": "chassis",
+      "nodes": [
+        "1201-0043-0002:6",
+        "1117-0040-0352 (3200-2627-0003_A):1",
+        "1117-0040-0352 (3200-2627-0003_A):2",
+        "1117-0040-0352 (3200-2627-0003_A):3",
+        "1117-0040-0352 (3200-2627-0003_A):4",
+        "2000-0025-0002:1/H25T Spline:1"
+      ],
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          -0.068,
+          0.0525,
+          0.04
+        ],
+        "axis": [
+          0,
+          1,
+          0
+        ]
+      },
+      "drive": {
+        "hardware": "windmill",
+        "shaft": "windmill",
+        "ratio": 1,
+        "of": "own shaft angle",
+        "note": "Direction derived from geometry: the official code feeds with the servo reversed at full power, and feeding must sweep POLLEN rearward onto the launcher ramp at the robot centreline."
+      },
+      "collision": {
+        "shape": "paddles",
+        "count": 4,
+        "radius": 0.0794,
+        "height": 0.04,
+        "center": [
+          -0.068,
+          0.0525,
+          0.04
+        ],
+        "kind": "feeder"
+      }
+    },
+    {
+      "id": "windmill_servo",
+      "label": "Windmill servo (2000-0025-0002 torque)",
+      "nodes": [
+        "2000-0025-0002:1"
+      ],
+      "movable": false,
+      "parent": "chassis",
+      "hardware": "windmill",
+      "collision": null
+    },
+    {
+      "id": "intake_arm",
+      "label": "Floating intake arm (8-hole U-channel, end plates, pivot shafts); carries the Gecko shaft, 100T gear and intake motor",
+      "nodes": [
+        "2106-4008-0800:7",
+        "2106-4008-0800:8",
+        "2920-0001-4008:1",
+        "2920-0001-4008:2",
+        "1309-0016-4008:3",
+        "1309-0016-4008:4",
+        "1121-0001-0048:1",
+        "1121-0001-0048:2",
+        "1143-0003-0096:1",
+        "1143-0003-0096:2",
+        "1201-0043-0002:1",
+        "1205-0001-0005:5",
+        "1205-0001-0005:6",
+        "1120-0008-0216:1",
+        "1611-0514-4008:17",
+        "1611-0514-4008:18",
+        "1516-4008-0430:2"
+      ],
+      "movable": true,
+      "parent": "chassis",
+      "joint": {
+        "type": "revolute",
+        "pivot": [
+          0,
+          0.048,
+          0.144
+        ],
+        "axis": [
+          1,
+          0,
+          0
+        ]
+      },
+      "drive": {
+        "joint": "intake_arm",
+        "ratio": -1,
+        "of": "lift angle (positive lift raises the Gecko shaft)"
+      },
+      "collision": null
+    }
+  ]
+}
